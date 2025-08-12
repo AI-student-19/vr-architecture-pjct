@@ -36,5 +36,17 @@
       </a-entity>
 
     </a-scene>
+    <script>
+      // This listens for clicks inside the scene and shows clicked position
+      document.querySelector('a-scene').addEventListener('click', (event) => {
+        const clickPosition = event.detail.intersection && event.detail.intersection.point;
+        if (clickPosition) {
+          console.log(`Clicked position: x=${clickPosition.x.toFixed(2)}, y=${clickPosition.y.toFixed(2)}, z=${clickPosition.z.toFixed(2)}`);
+          alert(`Clicked position:\nx=${clickPosition.x.toFixed(2)}, y=${clickPosition.y.toFixed(2)}, z=${clickPosition.z.toFixed(2)}`);
+        } else {
+          alert('Click on an object or floor to get position');
+        }
+      });
+    </script>
   </body>
 </html>
