@@ -29,15 +29,17 @@
     </a-scene>
 
     <script>
-      document.querySelector('a-scene').addEventListener('click', (event) => {
-        const clickPosition = event.detail.intersection && event.detail.intersection.point;
-        if (clickPosition) {
-          alert(`Clicked position:\nx=${clickPosition.x.toFixed(2)}, y=${clickPosition.y.toFixed(2)}, z=${clickPosition.z.toFixed(2)}`);
-          console.log(`Clicked position: x=${clickPosition.x}, y=${clickPosition.y}, z=${clickPosition.z}`);
+     document.querySelector('a-scene').addEventListener('click', (event) => {
+        console.log('Click event:', event);
+        const intersection = event.detail.intersection;
+        if (intersection) {
+          const point = intersection.point;
+          alert(`Clicked position:\nx=${point.x.toFixed(2)}, y=${point.y.toFixed(2)}, z=${point.z.toFixed(2)}`);
+          console.log(`Clicked position: x=${point.x}, y=${point.y}, z=${point.z}`);
         } else {
-          alert('Look at a clickable object and wait to click');
+          alert('Click the object or floor to get the positions');
         }
-      });
+    });
     </script>
   </body>
 </html>
