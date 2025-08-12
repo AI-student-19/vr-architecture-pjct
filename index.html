@@ -1,53 +1,42 @@
+<!DOCTYPE html>
 <html>
   <head>
     <meta charset="utf-8">
-    <title>VR Architecture Walkthrough</title>
+    <title>VR House with Position Logger</title>
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   </head>
   <body>
-    <a-scene background="color: #a0a0a0"> <!-- Changed to neutral gray -->
-      
-      <!-- SKY (optional) -->
-      <a-sky color="#888"></a-sky> <!-- Adds ambient sky to reduce brightness -->
+    <a-scene>
+      <!-- Load your 3D House Model -->
+      <a-assets>
+        <a-asset-item id="houseModel" src="vr-house.glb"></a-asset-item>
+      </a-assets>
 
-      <!-- Lighting -->
-      <a-entity light="type: ambient; color: #666; intensity: 0.5"></a-entity> <!-- Softer light -->
-      <a-entity light="type: directional; color: #ffffff; intensity: 0.7" position="5 10 7"></a-entity> <!-- Warm light source -->
+      <!-- Add House -->
+      <a-entity gltf-model="#houseModel" position="0 0 0" scale="1 1 1"></a-entity>
 
-      <!-- Ground -->
-      <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" color="#999999" shadow></a-plane>
-
-      <!-- Camera rig with walking + mouse -->
-      <a-entity id="rig" position="0 1.6 0">
-        <a-entity 
-          camera 
-          look-controls 
-          wasd-controls="acceleration: 10">
-        </a-entity>
+      <!-- Camera Rig with Position Logger -->
+      <a-entity id="rig" position="0 1.6 5" log-position>
+        <a-camera wasd-controls look-controls></a-camera>
       </a-entity>
 
-      <!-- GLB house model -->
-      <a-entity 
-        gltf-model="vr-house.glb" 
-        position="0 0 0" 
-        scale="1 1 1"
-        material="color: #ccc"   
-        shadow="cast: true; receive: true">
-      </a-entity>
-      <script>
-  AFRAME.registerComponent('log-position', {
-    init: function () {
-      window.addEventListener('keydown', (e) => {
-        // Press P to print position
-        if (e.key.toLowerCase() === 'p') {
-          let pos = this.el.getAttribute('position');
-          console.log('Current position:', pos);
-          alert(`X: ${pos.x.toFixed(2)}, Y: ${pos.y.toFixed(2)}, Z: ${pos.z.toFixed(2)}`);
+      <!-- Light -->
+      <a-entity light="type: ambient; color: #fff; intensity: 1"></a-entity>
+      <a-entity light="type: directional; color: #fff; intensity: 0.5" position="1 1 1"></a-entity>
+    </a-scene>
+
+    <!-- Position Logger Script -->
+    <script>
+      AFRAME.registerComponent('log-position', {
+        init: function () {
+          window.addEventListener('keydown', (e) => {
+            if (e.key.toLowerCase() === 'p') {
+              let pos = this.el.object3D.position;
+              console.log(`Current position: x=${pos.x.toFixed(2)}, y=${pos.y.toFixed(2)}, z=${pos.z.toFixed(2)}`);
+            }
+          });
         }
       });
-    }
-  });
-</script>
-    </a-scene>
+    </script>
   </body>
 </html>
