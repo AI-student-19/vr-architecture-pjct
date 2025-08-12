@@ -16,27 +16,30 @@
       <a-entity gltf-model="#houseModel" position="0 0 0" scale="1 1 1"></a-entity>
 
       <!-- Camera Rig with Position Logger -->
-      <a-entity id="rig" wasd-controls look-controls log-position>
-        <a-camera position="0 1.6 5"></a-camera>
+      <a-entity id="rig"   position="0 1.6 5" wasd-controls look-controls log-position>
+        <a-camera></a-camera>
       </a-entity>
 
       <!-- Light -->
-      <a-entity light="type: ambient; color: #fff; intensity: 0.4"></a-entity>
+      <a-entity light="type: ambient; color: #fff; ></a-entity>
       <a-entity light="type: directional; color: #fff; intensity: 0.5" position="1 1 1"></a-entity>
     </a-scene>
 
     <!-- Position Logger Script -->
     <script>
       AFRAME.registerComponent('log-position', {
-        init: function () {
-          window.addEventListener('keydown', (e) => {
-            if (e.key.toLowerCase() === 'p') {
-              let pos = this.el.object3D.position;
-              console.log(`Current position: x=${pos.x.toFixed(2)}, y=${pos.y.toFixed(2)}, z=${pos.z.toFixed(2)}`);
-            }
-          });
-        }
-      });
+       init: function () {
+         const camera = this.el.querySelector('a-camera').object3D;
+         console.log("Position logger active. Press 'P' to log coordinates.");
+         window.addEventListener('keydown', (e) => {
+          if (e.key.toLowerCase() === 'p') {
+           let pos = new THREE.Vector3();
+           camera.getWorldPosition(pos);
+           console.log(`Current position → X: ${pos.x.toFixed(2)}, Y: ${pos.y.toFixed(2)}, Z: ${pos.z.toFixed(2)}`);
+      }
+    });
+  }
+});
     </script>
   </body>
 </html>
