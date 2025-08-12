@@ -8,21 +8,21 @@
   <body>
     <a-scene>
       <!-- Lights -->
-      <a-entity light="type: ambient; color: #ffffff; intensity: 1"></a-entity>
-      <a-entity light="type: directional; intensity: 1" position="1 3 2"></a-entity>
+      <a-entity light="type: ambient; color: #666; intensity: 0.5"></a-entity>
+      <a-entity light="type: directional; intensity: 0.7" position="5 10 7"></a-entity>
 
       <!-- House model -->
       <a-assets>
         <a-asset-item id="houseModel" src="vr-house.glb"></a-asset-item>
       </a-assets>
-      <a-entity gltf-model="#houseModel" position="0 0 -5" rotation="0 180 0" scale="1 1 1"></a-entity>
+      <a-entity gltf-model="#houseModel" position="0 0 0" rotation="0 180 0" scale="1 1 1"></a-entity>
 
       <!-- Floor to click on -->
       <a-plane class="clickable" rotation="-90 0 0" width="50" height="50" color="#7BC8A4" position="0 0 0"></a-plane>
 
       <!-- Camera rig with movement and cursor -->
       <a-entity id="rig" position="0 0 0">
-        <a-entity id="camera" position="0 1.6 0" camera look-controls wasd-controls>
+        <a-entity id="camera" position="0 1.6 5" camera look-controls wasd-controls>
           <a-cursor fuse="true" fuse-timeout="1500" raycaster="objects: .clickable" material="color: white; shader: flat"></a-cursor>
         </a-entity>
       </a-entity>
