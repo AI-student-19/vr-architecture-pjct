@@ -1,45 +1,40 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="utf-8" />
-    <title>VR House Walkthrough</title>
-    <script src="https://aframe.io/releases/1.4.2/aframe.min.js"></script>
+    <meta charset="utf-8">
+    <title>VR Architecture Walkthrough</title>
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
   </head>
   <body>
-    <a-scene>
-      <!-- Lights -->
-      <a-entity light="type: ambient; color: #666; intensity: 0.5"></a-entity>
-      <a-entity light="type: directional; intensity: 0.7" position="5 10 7"></a-entity>
+    <a-scene background="color: #a0a0a0"> <!-- Changed to neutral gray -->
+      
+      <!-- SKY (optional) -->
+      <a-sky color="#888"></a-sky> <!-- Adds ambient sky to reduce brightness -->
 
-      <!-- House model -->
-      <a-assets>
-        <a-asset-item id="houseModel" src="vr-house.glb"></a-asset-item>
-      </a-assets>
-      <a-entity gltf-model="#houseModel" position="0 0 0" rotation="0 180 0" scale="1 1 1"></a-entity>
+      <!-- Lighting -->
+      <a-entity light="type: ambient; color: #666; intensity: 0.5"></a-entity> <!-- Softer light -->
+      <a-entity light="type: directional; color: #ffffff; intensity: 0.7" position="5 10 7"></a-entity> <!-- Warm light source -->
 
-      <!-- Floor to click on -->
-      <a-plane class="clickable" rotation="-90 0 0" width="50" height="50" color="#7BC8A4" position="0 0 0"></a-plane>
+      <!-- Ground -->
+      <a-plane position="0 0 0" rotation="-90 0 0" width="100" height="100" color="#999999" shadow></a-plane>
 
-      <!-- Camera rig with movement and cursor -->
-      <a-entity id="rig" position="0 0 0">
-        <a-entity id="camera" position="0 1.6 5" camera look-controls wasd-controls>
-          <a-cursor fuse="true" fuse-timeout="1500" raycaster="objects: .clickable" material="color: white; shader: flat"></a-cursor>
+      <!-- Camera rig with walking + mouse -->
+      <a-entity id="rig" position="0 1.6 5">
+        <a-entity 
+          camera 
+          look-controls 
+          wasd-controls="acceleration: 10">
         </a-entity>
       </a-entity>
-    </a-scene>
 
-    <script>
-     document.querySelector('a-scene').addEventListener('click', (event) => {
-        console.log('Click event:', event);
-        const intersection = event.detail.intersection;
-        if (intersection) {
-          const point = intersection.point;
-          alert(`Clicked position:\nx=${point.x.toFixed(2)}, y=${point.y.toFixed(2)}, z=${point.z.toFixed(2)}`);
-          console.log(`Clicked position: x=${point.x}, y=${point.y}, z=${point.z}`);
-        } else {
-          alert('Click the object or floor to get the positions');
-        }
-    });
-    </script>
+      <!-- GLB house model -->
+      <a-entity 
+        gltf-model="vr-house.glb" 
+        position="0 0 0" 
+        scale="1 1 1"
+        shadow="cast: true; receive: true">
+      </a-entity>
+
+    </a-scene>
   </body>
 </html>
