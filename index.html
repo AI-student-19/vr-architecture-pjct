@@ -34,7 +34,20 @@
         material="color: #ccc"   
         shadow="cast: true; receive: true">
       </a-entity>
-
+      <script>
+  AFRAME.registerComponent('log-position', {
+    init: function () {
+      window.addEventListener('keydown', (e) => {
+        // Press P to print position
+        if (e.key.toLowerCase() === 'p') {
+          let pos = this.el.getAttribute('position');
+          console.log('Current position:', pos);
+          alert(`X: ${pos.x.toFixed(2)}, Y: ${pos.y.toFixed(2)}, Z: ${pos.z.toFixed(2)}`);
+        }
+      });
+    }
+  });
+</script>
     </a-scene>
   </body>
 </html>
