@@ -16,12 +16,12 @@
       <a-entity gltf-model="#houseModel" position="0 0 0" scale="1 1 1"></a-entity>
 
       <!-- Camera Rig with Position Logger -->
-      <a-entity id="rig" position="0 1.6 5" log-position>
-        <a-camera wasd-controls look-controls></a-camera>
+      <a-entity id="rig" wasd-controls look-controls log-position>
+        <a-camera position="0 1.6 5"></a-camera>
       </a-entity>
 
       <!-- Light -->
-      <a-entity light="type: ambient; color: #fff; intensity: 1"></a-entity>
+      <a-entity light="type: ambient; color: #fff; intensity: 0.4"></a-entity>
       <a-entity light="type: directional; color: #fff; intensity: 0.5" position="1 1 1"></a-entity>
     </a-scene>
 
