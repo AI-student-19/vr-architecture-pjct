@@ -25,38 +25,48 @@
 
     </a-scene>
 
-    <script>
-      const roomPositions = {
-        kitchen: {x: -0.7, y: -6.3, z:0},
-        hall: {x:-0.8, y:-7.5, z: 0},
-        bedroom1: {x: -0.85, y: -9.07, z: 0},
-        bedroom2: {x: -0.72, y:-11, z: 0},
-        bedroom3: {x: -12, y: 1.6, z: 2},
-        sitting: {x: -0.4, y:-5.6, z: 0},
-        lounge: {x:-0.6, y:-11.7, z: 0}
-      };
+   <script>
+  const roomPositions = {
+    kitchen: { x: -0.7, y: -6.3, z: 0 },
+    hall: { x: -0.8, y: -7.5, z: 0 },
+    bedroom1: { x: -0.85, y: -9.07, z: 0 },
+    bedroom2: { x: -0.72, y: -11, z: 0 },
+    bedroom3: { x: -1.2, y: -1.6, z: 2 },
+    sitting: { x: -0.4, y: -5.6, z: 0 },
+    lounge: { x: -0.6, y: -11.7, z: 0 }
+  };
 
-      const rig = document.querySelector('#rig');
+  const rig = document.querySelector("#rig");
 
-      // Voice Recognition
-      const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
-      const recognition = new SpeechRecognition();
-      recognition.continuous = true;
-      recognition.lang = 'en-US';
+  // Voice Recognition Setup
+  window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const recognition = new window.SpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = false;
+  recognition.lang = "en-US";
 
-      recognition.onresult = function(event) {
-        const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
-        console.log("Heard:", transcript);
+  recognition.onresult = (event) => {
+    const transcript = event.results[event.results.length - 1][0].transcript.toLowerCase().trim();
+    console.log("Heard:", transcript);
 
-        for (let room in roomPositions) {
-          if (transcript.includes(`go to ${room}`)) {
-            rig.setAttribute('position', roomPositions[room]);
-            console.log(`Teleporting to ${room}`);
-          }
-        }
-      };
+    if (transcript.includes("go to kitchen")) {
+      rig.setAttribute("position", roomPositions.kitchen);
+    } else if (transcript.includes("go to hall")) {
+      rig.setAttribute("position", roomPositions.hall);
+    } else if (transcript.includes("go to bedroom one")) {
+      rig.setAttribute("position", roomPositions.bedroom1);
+    } else if (transcript.includes("go to bedroom two")) {
+      rig.setAttribute("position", roomPositions.bedroom2);
+    } else if (transcript.includes("go to bedroom three")) {
+      rig.setAttribute("position", roomPositions.bedroom3);
+    } else if (transcript.includes("go to sitting area") || transcript.includes("go to sitting")) {
+      rig.setAttribute("position", roomPositions.sitting);
+    } else if (transcript.includes("go to lounge")) {
+      rig.setAttribute("position", roomPositions.lounge);
+    }
+  };
 
-      recognition.start();
-    </script>
+  recognition.start();
+</script>
   </body>
 </html>
