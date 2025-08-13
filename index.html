@@ -23,24 +23,19 @@
 
       <!-- GLB House -->
       <a-entity gltf-model="vr-house.glb" position="0 0 0" scale="1 1 1"></a-entity>
-      !-- Add this inside your <a-scene> -->
-      <a-entity id="voiceText" 
-          text="value: Listening...; color: yellow; align: center; width: 3" 
-          position="0 2 -3">
-</a-entity>
-
+     
     </a-scene>
 
    <script>
   const roomPositions = {
-    kitchen: { x: 0.7, y: 6.3, z: 0 },
-    hall: { x: 0.8, y: 7.5, z: 0 },
-    bedroom1: { x: 0.85, y: 9.07, z: 0 },
-    bedroom2: { x: 0.72, y: 11, z: 0 },
-    bedroom3: { x: 1.2, y: 1.6, z: 2 },
-    sitting: { x: 0.4, y: 5.6, z: 0 },
-    lounge: { x: 0.6, y: 11.7, z: 0 }
-  };
+    kitchen:  { x: 0.7,  y: 1.6,  z: 3.2 },
+    hall:     { x: 0.8,  y: 1.6,  z: 0 },
+    bedroom1: { x: 0.85, y: 1.6,  z: 9.07 },
+    bedroom2: { x: 0.72, y: 1.6,  z: 11 },
+    bedroom3: { x: 1.2,  y: 1.6,  z: 2 },
+    sitting:  { x: 0.4,  y: 1.6,  z: 0 },
+    lounge:   { x: 0.6,  y: 1.6,  z: 0 }
+};
 
   const rig = document.querySelector("#rig");
 
