@@ -23,6 +23,31 @@
 
       <!-- GLB House -->
       <a-entity gltf-model="vr-house.glb" position="0 0 0" scale="1 1 1"></a-entity>
+  <a-entity id="house" 
+            gltf-model="url(vr-house.glb)" 
+            position="0 0 0"
+            scale="1 1 1">
+  </a-entity>
+</a-scene>
+
+<script>
+AFRAME.registerComponent('recolor-house', {
+  init: function () {
+    this.el.addEventListener('model-loaded', () => {
+      const model = this.el.getObject3D('mesh');
+      model.traverse((node) => {
+        if (node.isMesh) {
+          // Example: Change all meshes to blue
+          node.material.color.set('#ff0000'); // red color
+        }
+      });
+    });
+  }
+});
+
+// Attach the component to the house
+document.querySelector('#house').setAttribute('recolor-house', '');
+</script>
      
     </a-scene>
 
