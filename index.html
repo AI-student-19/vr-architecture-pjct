@@ -68,28 +68,7 @@
   };
 
   recognition.start();
-  // Wait for the house model to load, then recolor parts
-document.querySelector('#house').addEventListener('model-loaded', function () {
-    const model = this.getObject3D('mesh');
-
-    model.traverse((node) => {
-        if (node.isMesh) {
-            // Change entire house color (golden yellow)
-            node.material.color.set('#ffcc00');
-        }
-
-        // 🎯 Example: Different colors for specific parts
-        if (node.name.toLowerCase().includes("black roof")) {
-            node.material.color.set('#ff0000'); // red roof
-        }
-        if (node.name.toLowerCase().includes("light blue wall")) {
-            node.material.color.set('#ffffff'); // white walls
-        }
-        if (node.name.toLowerCase().includes("brown door")) {
-            node.material.color.set('#8b4513'); // brown door
-        }
-    });
-});   
+  
 </script>
   </body>
 </html>
